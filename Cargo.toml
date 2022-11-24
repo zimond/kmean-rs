@@ -13,9 +13,16 @@ exclude = ["examples/*"]
 
 [dependencies]
 packed_simd = { version = "0.3.4", package = "packed_simd_2" }
-rayon = "1"
+rayon = { version = "1", optional = true }
 rand = "0.7"
 num = "0.3"
+itertools = { version = "0.10.5", optional = true }
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+rand = { version = "0.7", features = ["wasm-bindgen"] }
+
+[features]
+default = ["itertools"]
 
 [lib]
 name = "kmeans"
